@@ -4,7 +4,9 @@ MyApp.addRegions({
   mainRegion: "#content"
 });
 
+
 AngryCat = Backbone.Model.extend({
+ 
   defaults: {
     votes: 0
   },
@@ -20,7 +22,69 @@ AngryCat = Backbone.Model.extend({
   rankDown: function() {
     this.set({rank: this.get('rank') + 1});
   }
+
+
 });
+
+/*
+AngryCat = Backbone.Collection.extend({
+
+  model: AngryCat
+
+  });
+
+*/
+
+
+/*
+AngryCatView = Backbone.Marionette.ItemView.extend({
+  template: "#angry_cat-template", // Refers to the template (The MVC View) (Mandatory) 
+  tagName : "tr", //Refers to the tag in the html 
+  className :'angry_cat' // is simply an HTML class that gets added to the element Backbone creates, 
+                          // so our item will have “class=’angry_cat’” in its HTML tag.
+});
+*/
+
+/*
+AngryCatsView = Backbone.Marionette.CompositeView.extend({
+  template: "#angry_cats-template",
+  tagName:"table",
+  className:"table-striped table-bordered",
+
+  id :"angry_cats",
+  itemView: AngryCatView,
+
+  initialize: function(){
+    this.listenTo(this.collection, "sort", this.renderCollection);
+  },
+
+  appendHtml:function(collectionView, itemView){
+      collectionView.$("tbody").append(itemView.el);
+  }
+});
+*/
+
+/*
+MyApp.addInitializer(function(options){
+  var angryCatsView = new AngryCatsView({
+    collection: options.cats
+  });
+  MyApp.mainRegion.show(angryCatsView);
+});
+
+$(document).ready(function(){
+  var cats = new AngryCats([
+      new AngryCat({ name: 'Wet Cat' }),
+     new AngryCat({ name: 'Bitey Cat' }),
+      new AngryCat({ name: 'Surprised Cat' })
+  ]);
+
+  MyApp.start({cats: cats});
+
+});
+*/
+
+  
 
 AngryCats = Backbone.Collection.extend({
   model: AngryCat,
@@ -103,6 +167,8 @@ AngryCatView = Backbone.Marionette.ItemView.extend({
   template: "#angry_cat-template",
   tagName: 'tr',
   className: 'angry_cat',
+
+
   
   events: {
     'click .rank_up img': 'rankUp',
@@ -130,6 +196,7 @@ AngryCatView = Backbone.Marionette.ItemView.extend({
   }
 });
 
+
 AngryCatsView = Backbone.Marionette.CompositeView.extend({
   tagName: "table",
   id: "angry_cats",
@@ -145,6 +212,7 @@ AngryCatsView = Backbone.Marionette.CompositeView.extend({
     collectionView.$("tbody").append(itemView.el);
   }
 });
+
 
 MyApp.addInitializer(function(options){
   var angryCatsView = new AngryCatsView({
